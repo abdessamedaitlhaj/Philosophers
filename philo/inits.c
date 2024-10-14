@@ -6,7 +6,7 @@
 /*   By: aait-lha <aait-lha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/09/25 22:14:16 by aait-lha          #+#    #+#             */
-/*   Updated: 2024/10/12 15:58:33 by aait-lha         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:13:18 by aait-lha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,8 +44,7 @@ pthread_mutex_t	*init_forks(int nb_forks, t_philo *philo)
 	i = 0;
 	while (i < nb_forks)
 	{
-		if (pthread_mutex_init(&forks[i], NULL))
-			return (NULL);
+		pthread_mutex_init(&forks[i], NULL);
 		pthread_mutex_init(&philo[i].mutex_eat_count, NULL);
 		pthread_mutex_init(&philo[i].mutex_last_eat, NULL);
 		i++;
@@ -59,10 +58,14 @@ int	init_data(t_philo_args *args, t_philo **philos)
 	pthread_mutex_init(&args->print, NULL);
 	*philos = init_philos(args);
 	if (!*philos)
+	{
+		pthread_mutex_destroy(&args->print);
 		return (1);
+	}
 	args->forks = init_forks(args->nb_philo, *philos);
 	if (!args->forks)
 	{
+		pthread_mutex_destroy(&args->print);
 		free(*philos);
 		return (1);
 	}

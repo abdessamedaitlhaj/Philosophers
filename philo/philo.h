@@ -6,7 +6,7 @@
 /*   By: aait-lha <aait-lha@student.1337.ma>        +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/08/10 08:38:43 by aait-lha          #+#    #+#             */
-/*   Updated: 2024/10/12 15:56:12 by aait-lha         ###   ########.fr       */
+/*   Updated: 2024/10/14 12:17:13 by aait-lha         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ typedef struct s_philo
 	t_philo_args	*args;
 }	t_philo;
 
-void			error(void);
+int				error(t_philo_args *args, t_philo *philos);
 void			free_args(char **args);
 int				ft_atoi(char const *str);
 int				ft_isspace(int c);
